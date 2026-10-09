@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff4f8" />
+    <meta name="description" content="Милый финансовый дневник Тории — донги, рубли и маленькие денежные победы." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <title>Мими Money · Твой денежный дневник</title>
+    <style>
+      #boot-error { margin: 24px; padding: 18px; border-radius: 16px; background: #fff0f5; color: #6b2440; font: 16px/1.5 system-ui, sans-serif; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="boot-error" hidden>
+      <strong>Мими Money пока не загрузилась 🙈</strong>
+      <p>Это диагностическое сообщение. Сделай скриншот этого экрана — он поможет найти точную причину.</p>
+      <pre id="boot-error-detail" style="white-space:pre-wrap"></pre>
+    </div>
+    <script>
+      (() => {
+        const show = (message) => {
+          const panel = document.getElementById('boot-error');
+          const detail = document.getElementById('boot-error-detail');
+          if (panel && detail) { panel.hidden = false; detail.textContent = String(message || 'Неизвестная ошибка'); }
+        };
+        window.addEventListener('error', (event) => {
+          if (event.message || event.filename) show([event.message, event.filename, event.lineno ? `строка ${event.lineno}` : ''].filter(Boolean).join('\n'));
+        });
+        window.addEventListener('unhandledrejection', (event) => show(event.reason?.stack || event.reason));
+        window.setTimeout(() => {
+          const app = document.getElementById('app');
+          if (app && !app.childElementCount) show('JavaScript не отрисовал интерфейс. Проверь путь к собранному файлу в GitHub Pages.');
+        }, 3500);
+      })();
+    </script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
