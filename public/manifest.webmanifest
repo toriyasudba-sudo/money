@@ -1,0 +1,19 @@
+{
+  "name": "Мими Money — денежный дневник",
+  "short_name": "Мими Money",
+  "description": "Кавайный финансовый дневник в донгах и рублях",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff4f8",
+  "theme_color": "#ff7ea8",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
